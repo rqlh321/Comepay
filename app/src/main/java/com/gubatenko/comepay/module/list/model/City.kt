@@ -1,3 +1,6 @@
 package com.gubatenko.comepay.module.list.model
 
-data class City(val name: String = "city", val id: String = "id")
+import com.google.gson.annotations.SerializedName
+
+data class City(@SerializedName("geoid") val id: Int,
+                @SerializedName("name") val name: String)

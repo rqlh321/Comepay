@@ -2,15 +2,19 @@ package com.gubatenko.comepay.module.list.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.gubatenko.comepay.module.list.model.City
+import com.gubatenko.comepay.CompeyApplication
+import com.gubatenko.comepay.WeatherApi
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 @InjectViewState
 class CityPresenter : MvpPresenter<CityView>() {
-//    init {
-//        InspectorApplication.repoComponent().inject(this)
-//    }
-//
-//    @Inject lateinit var repo: Repository
+    init {
+        CompeyApplication.netComponent().inject(this)
+    }
+
+    @Inject lateinit var weather: WeatherApi
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -18,6 +22,9 @@ class CityPresenter : MvpPresenter<CityView>() {
     }
 
     private fun content() {
-        viewState.success(listOf(City(), City(), City(), City()))
+        weather.cites()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ viewState.success(it) }, { viewState.error(it.message.toString()) })
     }
 }

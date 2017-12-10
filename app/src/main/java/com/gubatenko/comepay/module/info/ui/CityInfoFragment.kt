@@ -18,7 +18,7 @@ class CityInfoFragment : MvpAppCompatDialogFragment(), CityInfoView {
     @InjectPresenter lateinit var presenter: CityInfoPresenter
 
     @ProvidePresenter
-    fun presenter(): CityInfoPresenter = CityInfoPresenter(arguments?.getString(Const.CITY_ID, ""))
+    fun presenter(): CityInfoPresenter = CityInfoPresenter(arguments?.getInt(Const.CITY_ID))
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_city, container, false)
@@ -45,10 +45,10 @@ class CityInfoFragment : MvpAppCompatDialogFragment(), CityInfoView {
 
     companion object {
 
-        fun instance(id: String, name: String): CityInfoFragment {
+        fun instance(id: Int, name: String): CityInfoFragment {
             val fragment = CityInfoFragment()
             val bundle = Bundle()
-            bundle.putString(Const.CITY_ID, id)
+            bundle.putInt(Const.CITY_ID, id)
             bundle.putString(Const.CITY_NAME, name)
             fragment.arguments = bundle
             return fragment

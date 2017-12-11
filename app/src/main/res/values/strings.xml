@@ -2,6 +2,6 @@
     <string name="app_name">Comepay</string>
     <string name="retry">Повторить</string>
     <string name="temp_hint">Изображение описывающее температуру</string>
-    <string name="api_key"> lrwkFAwxka4yGaRNtWEeoi6TUdVBfnB3</string>
-    <string name="server">https://api.weather.yandex.ru/v1/</string>
+    <string name="api_key">9492bc092aee51eac7a22d53e03ef2c2</string>
+    <string name="server">http://api.openweathermap.org/data/</string>
 </resources>

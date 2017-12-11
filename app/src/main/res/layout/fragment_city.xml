@@ -17,18 +17,17 @@
 
             <TextView
                 android:id="@+id/info"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:visibility="gone" />
+                android:gravity="center" />
 
             <Button
                 android:id="@+id/retry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/info"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:text="@string/retry"
                 android:textAllCaps="false"
                 android:visibility="gone" />
@@ -37,6 +36,7 @@
                 android:id="@+id/progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_centerInParent="true"
                 android:visibility="gone" />
 

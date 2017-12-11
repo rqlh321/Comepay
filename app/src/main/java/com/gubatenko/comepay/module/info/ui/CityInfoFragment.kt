@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatDialogFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.gubatenko.comepay.Const
 import com.gubatenko.comepay.R
+import com.gubatenko.comepay.data.local.Const
 import com.gubatenko.comepay.module.info.model.CityInfo
 import com.gubatenko.comepay.module.info.presenter.CityInfoPresenter
 import com.gubatenko.comepay.module.info.presenter.CityInfoView

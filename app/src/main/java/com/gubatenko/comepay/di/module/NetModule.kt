@@ -4,7 +4,7 @@ import android.app.Application
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.gubatenko.comepay.WeatherApi
+import com.gubatenko.comepay.data.net.WeatherApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -45,16 +45,21 @@ class NetModule(private val serverAddress: String, private val apiKey: String) {
         clientBuilder.cache(cache)
         clientBuilder.connectTimeout(10, TimeUnit.SECONDS)
         clientBuilder.readTimeout(0, TimeUnit.SECONDS)
-        clientBuilder.addInterceptor({ chain ->
+        clientBuilder.addInterceptor { chain ->
             val original = chain.request()
-            val request = original.newBuilder()
-                    .headers(original.headers())
-                    .header("X-Yandex-API-Key", apiKey)
-                    .method(original.method(), original.body())
+            val originalHttpUrl = original.url()
+
+            val url = originalHttpUrl.newBuilder()
+                    .addQueryParameter("appid", apiKey)
                     .build()
 
+            // Request customization: add request headers
+            val requestBuilder = original.newBuilder()
+                    .url(url)
+
+            val request = requestBuilder.build()
             chain.proceed(request)
-        })
+        }
         return clientBuilder.build()
     }
 

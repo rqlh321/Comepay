@@ -29,6 +29,8 @@ class MainActivity : MvpAppCompatActivity(), CityView {
         list.addItemDecoration(DividerItemDecoration(this, LinearLayout.VERTICAL))
         adapter = CityAdapter(presenter)
         list.adapter = adapter
+
+        retry.setOnClickListener { presenter.content() }
     }
 
     override fun progress(visibility: Int) {

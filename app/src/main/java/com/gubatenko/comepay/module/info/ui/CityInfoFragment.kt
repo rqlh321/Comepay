@@ -23,6 +23,11 @@ class CityInfoFragment : MvpAppCompatDialogFragment(), CityInfoView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_city, container, false)
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        retry.setOnClickListener { presenter.content() }
+    }
+
     override fun success(item: CityInfo) {
         retry.visibility = View.GONE
         info.visibility = View.GONE

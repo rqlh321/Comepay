@@ -1,8 +1,18 @@
 package com.gubatenko.comepay.data.local
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.GradientDrawable
+import android.support.v4.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import com.gubatenko.comepay.R
+import com.gubatenko.comepay.module.info.model.Day
 import com.gubatenko.comepay.module.list.model.City
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -39,5 +49,35 @@ class Res(private val context: Context) {
                 }
     }
 
+    fun picture(day: Day): Bitmap {
+        return Glide.with(context)
+                .asBitmap()
+                .load(if (day.main.temp <= 0) "https://hikingartist.files.wordpress.com/2012/05/1-christmas-tree.jpg"
+                else "http://assets.smoothradio.com/2013/30/weather-1375260252-article-1.jpg")
+                .apply(RequestOptions.centerCropTransform())
+                .submit(300, 300)
+                .get()
+    }
+
+    fun error(): Bitmap {
+        val d = ContextCompat.getDrawable(context, R.drawable.unnamed)
+
+        if (d is BitmapDrawable) {
+            return d.bitmap
+        }
+
+        if (d is GradientDrawable) {
+            val bitmap = Bitmap.createBitmap(300,300, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            d.setBounds(0, 0, 300, 300)
+            d.setStroke(1, Color.BLACK)
+            d.isFilterBitmap = true
+            d.draw(canvas)
+            return bitmap
+        }
+
+        val bit = BitmapFactory.decodeResource(context.resources, R.drawable.unnamed)
+        return bit.copy(Bitmap.Config.ARGB_8888, true)
+    }
 
 }

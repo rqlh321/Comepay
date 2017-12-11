@@ -22,7 +22,7 @@ class CityPresenter : MvpPresenter<CityView>() {
         content()
     }
 
-    private fun content() {
+    fun content() {
         res.cites()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
